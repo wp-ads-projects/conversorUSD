@@ -8,3 +8,4 @@ export const getExchangeRates = async (baseCurrency: string) => {
     throw new Error('Error al obtener las tasas de cambio : '+e);
   }
 };
+
