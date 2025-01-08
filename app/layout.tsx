@@ -123,11 +123,11 @@ export default function RootLayout({
     <html lang="es">
       <body>
         {children}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-        <Analytics />
       </body>
     </html>
   );
