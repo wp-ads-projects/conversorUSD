@@ -52,6 +52,7 @@ export default function RootLayout({
 
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Convertidor Dólar a Peso Chileno | Tipo de Cambio Actualizado",
@@ -126,6 +127,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
+        <Analytics />
       </body>
     </html>
   );
