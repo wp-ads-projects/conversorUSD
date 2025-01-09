@@ -91,7 +91,7 @@ export const metadata = {
   description:
     "Convierte dólares a pesos chilenos con nuestro conversor de divisas. Tipo de cambio actualizado entre Dólar (USD) y Peso Chileno (CLP).",
   url: "https://conversor-sand.vercel.app/",
-  image: "https://conversor-sand.vercel.app/opengraph.webp",
+  image: "/opengraph.png",
   twitterHandle: "@tu_usuario_twitter", // Reemplazar con tu usuario de Twitter
 };
 
