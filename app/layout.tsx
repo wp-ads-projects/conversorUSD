@@ -72,9 +72,7 @@ export const metadata: Metadata = {
     url: "https://dolar-valor.cl/",
     images: [
       {
-        url: "/OG.webp",
-        width: 1200,
-        height: 630,
+        url: "https://dolar-valor.cl/OG.webpp",
         alt: "Sitio web Convertidor de Dólar a Peso Chileno",
       },
     ],
@@ -90,7 +88,7 @@ export const metadata: Metadata = {
     description:
       "Convierte dólares a pesos chilenos con nuestro conversor de divisas. Tipo de cambio actualizado entre Dólar (USD) y Peso Chileno (CLP)",
     images: {
-      url: "/OG.webp",
+      url: "https://dolar-valor.cl/OG.webp",
       alt: "Sitio web Convertidor de Dólar a Peso Chileno",
     },
   },
