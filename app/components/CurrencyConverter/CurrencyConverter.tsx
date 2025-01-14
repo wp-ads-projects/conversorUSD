@@ -13,6 +13,7 @@ import { useExchangeRates } from "@/app/hooks/useExchangeRates";
 import styles from "./CurrencyConverter.module.css";
 import { TbArrowsExchange } from "react-icons/tb";
 import Image from "next/image";
+import { sendGTMEvent, sendGAEvent } from "@next/third-parties/google";
 
 // Definición de tipos para acciones
 interface SetFromCurrencyAction {
@@ -57,13 +58,35 @@ const initialState: State = {
 };
 
 // Reducer con tipos explícitos
-const reducer = (state: State, action: Action): State => {
+/* const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_FROM_CURRENCY":
       return { ...state, fromCurrency: action.payload };
     case "SET_TO_CURRENCY":
       return { ...state, toCurrency: action.payload };
     case "SET_AMOUNT":
+      return { ...state, amount: action.payload };
+    case "SET_RESULT":
+      return { ...state, result: action.payload };
+    default:
+      return state;
+  }
+}; */
+
+// Reducer con tipos explícitos
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "SET_FROM_CURRENCY":
+      console.log(`Divisa de origen seleccionada: ${action.payload}`);
+      sendGAEvent("currency_conversion", { fromCurrency: action.payload }); 
+      return { ...state, fromCurrency: action.payload };
+    case "SET_TO_CURRENCY":
+      console.log(`Divisa de destino seleccionada: ${action.payload}`);
+      sendGAEvent("currency_conversion", { toCurrency: action.payload }); 
+      return { ...state, toCurrency: action.payload };
+    case "SET_AMOUNT":
+      console.log(`Monto ingresado: ${action.payload}`);
+      sendGAEvent("currency_conversion", { amount: action.payload }); 
       return { ...state, amount: action.payload };
     case "SET_RESULT":
       return { ...state, result: action.payload };
@@ -106,6 +129,8 @@ const CurrencyConverter: FC = () => {
   // Manejadores de eventos
   const handleSwitchCurrencies = useCallback(() => {
     if (fromCurrency !== toCurrency) {
+      console.log(`Intercambiando divisas: ${fromCurrency} ↔️ ${toCurrency}`);
+      sendGAEvent("currency_conversion_switch", { fromCurrency, toCurrency });
       dispatch({ type: "SET_FROM_CURRENCY", payload: toCurrency });
       dispatch({ type: "SET_TO_CURRENCY", payload: fromCurrency });
     }
@@ -352,7 +377,7 @@ const CustomSelect: FC<CustomSelectProps> = React.memo(
   }
 );
 
-// Componente FlagImage para evitar repetición de código
+// Componente FlagImage
 const FlagImage: FC<{ src: string; alt: string }> = ({ src, alt }) => (
   <Image
     src={src}
