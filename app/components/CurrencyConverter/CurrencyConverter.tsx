@@ -72,21 +72,23 @@ const initialState: State = {
       return state;
   }
 }; */
-
 // Reducer con tipos explícitos
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_FROM_CURRENCY":
       console.log(`Divisa de origen seleccionada: ${action.payload}`);
-      sendGAEvent("currency_conversion", { fromCurrency: action.payload }); 
+      sendGAEvent("currency_conversion", { fromCurrency: action.payload });
+      sendGTMEvent({ event: "currency_conversion", fromCurrency: action.payload });
       return { ...state, fromCurrency: action.payload };
     case "SET_TO_CURRENCY":
       console.log(`Divisa de destino seleccionada: ${action.payload}`);
-      sendGAEvent("currency_conversion", { toCurrency: action.payload }); 
+      sendGAEvent("currency_conversion", { toCurrency: action.payload });
+      sendGTMEvent({ event: "currency_conversion", toCurrency: action.payload });
       return { ...state, toCurrency: action.payload };
     case "SET_AMOUNT":
       console.log(`Monto ingresado: ${action.payload}`);
-      sendGAEvent("currency_conversion", { amount: action.payload }); 
+      sendGAEvent("currency_conversion", { amount: action.payload });
+      sendGTMEvent({ event: "currency_conversion", amount: action.payload });
       return { ...state, amount: action.payload };
     case "SET_RESULT":
       return { ...state, result: action.payload };
@@ -94,6 +96,9 @@ const reducer = (state: State, action: Action): State => {
       return state;
   }
 };
+
+
+
 
 // Componente principal: CurrencyConverter
 const CurrencyConverter: FC = () => {
